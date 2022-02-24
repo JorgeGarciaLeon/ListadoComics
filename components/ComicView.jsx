@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Text ,StyleSheet,TouchableOpacity} from 'react-native';
 
-export const ComicView = ({ deleteComic, list }) => {
+export const ComicView = ({ setShowModalModify, deleteComic, list, setModifyComic }) => {
 
     const { name, pages, readPages } = list;
+
+    const modifify = () =>{
+        setShowModalModify(true)
+        setModifyComic(list)
+    }
 
     return (
         <View style={styles.listItem} >
@@ -11,7 +16,7 @@ export const ComicView = ({ deleteComic, list }) => {
             <Text styles={styles.listItemText}> Páginas: {pages}</Text>
             <Text styles={styles.listItemText}> Leídas: {readPages}</Text>
             
-            <TouchableOpacity >
+            <TouchableOpacity onPress={modifify}>
                     <View >
                         <Text >Modificar</Text>
                     </View>

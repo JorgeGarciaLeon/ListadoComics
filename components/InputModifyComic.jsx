@@ -9,17 +9,16 @@ import {
 } from 'react-native';
 
 
-export const InputAddComic = ({  addMode, setShowModal, addComic }) => {
+export const InputModifyComic = ({ deleteComic, addComic, modifyComic, setShowModalModify, showModalModify }) => {
 
-    const [comicName, setComicName] = useState("");
+    const [comicName, setComicName] = useState(modifyComic.name);
     const [comicPage, setComicPage] = useState("");
     const [comicPagRead, setComicPageRead] = useState("");
 
-    let newComic = {
-        name:"",
-        pages: "",
-        readPages: ""
-    }
+    //setComicName(modifyComic.name);
+    //setComicPage(modifyComic.pages);
+    //setComicPageRead(modifyComic.readPages)
+
 
     const changeTextName = (comicName) => {
         setComicName(comicName);
@@ -33,21 +32,21 @@ export const InputAddComic = ({  addMode, setShowModal, addComic }) => {
         setComicPageRead(comicPagRead);
     }
 
-    const sendComic = () => {
+    const changeComic = () => {
         const pagLeidas = (parseInt(comicPagRead)*100) /parseInt(comicPage) + "%"
-        newComic = {
+        const newComic = {
             name:comicName,
             pages: comicPage,
             readPages: pagLeidas
         }
-
-        addComic(newComic)
-        setShowModal(false)
+        deleteComic(modifyComic["key"]);
+        addComic(newComic);
+        setShowModalModify(false)
     }
 
 
     return (
-        <Modal visible={addMode} animationType={'fade'} transparent={true}>
+        <Modal visible={showModalModify} animationType={'fade'} transparent={true}>
             <View style={styles.inputModal}>
 
                 <TextInput
@@ -72,13 +71,13 @@ export const InputAddComic = ({  addMode, setShowModal, addComic }) => {
                 />
 
 
-                <TouchableOpacity onPress={sendComic} style={styles.containerButton}>
+                <TouchableOpacity onPress={changeComic} style={styles.containerButton}>
                     <View style={styles.containerButton}>
-                        <Text style={styles.textButtonAdd}>Añadir Comic</Text>
+                        <Text style={styles.textButtonAdd}>Editar Comic</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => setShowModal(false)} style={styles.containerButtonCancel}>
+                <TouchableOpacity onPress={() => setShowModalModify(false)} style={styles.containerButtonCancel}>
                     <View style={styles.containerButton}>
                         <Text style={styles.textButtonAdd}>Cancelar</Text>
                     </View>

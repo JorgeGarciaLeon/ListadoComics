@@ -7,14 +7,19 @@ import {
   Text
 } from 'react-native';
 import { InputAddComic } from './components/InputAddComic';
+import { InputModifyComic } from './components/InputModifyComic';
 import { ComicView } from './components/ComicView';
 
 
 export default function App() {
   const [comicList, setComicList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showModalModify, setShowModalModify] = useState(false);
+  const [modifyComic, setModifyComic] = useState([]);
 
-  const addProductHandler = (comic) => {
+  
+
+  const addComic = (comic) => {
     if (comic.name.value !== "") {
       setComicList((currentComicList) =>
         [...comicList, { key: Math.random().toString(), name: comic.name, pages: comic.pages, readPages: comic.readPages }]);
@@ -29,7 +34,6 @@ export default function App() {
     })
   }
 
-
   return (
     <View style={styles.container}>
 
@@ -39,11 +43,13 @@ export default function App() {
         </View>
       </TouchableOpacity>
 
-      <InputAddComic addMode={showModal} addProductHandler={addProductHandler} setShowModal={setShowModal} />
+      <InputAddComic addMode={showModal} addComic={addComic} setShowModal={setShowModal} />
+
+      <InputModifyComic deleteComic={deleteComic} addComic={addComic} modifyComic={modifyComic} setShowModalModify={setShowModalModify} showModalModify={showModalModify}/>
 
       <FlatList data={comicList} renderItem={(comic) => {
         return (
-          <ComicView list={comic.item} deleteComic={deleteComic} />
+          <ComicView setModifyComic={setModifyComic} setShowModalModify={setShowModalModify} list={comic.item} deleteComic={deleteComic} />
         )
 
       }} />
