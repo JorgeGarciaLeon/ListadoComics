@@ -15,6 +15,12 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
     const [comicPage, setComicPage] = useState("");
     const [comicPagRead, setComicPageRead] = useState("");
 
+    let newComic = {
+        name:"",
+        pages: "",
+        readPages: ""
+    }
+
     const changeTextName = (comicName) => {
         setComicName(comicName);
     }
@@ -29,7 +35,7 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
 
     const sendComic = () => {
         const pagLeidas = (parseInt(comicPagRead)*100) /parseInt(comicPage) + "%"
-        const newComic = {
+        newComic = {
             name:comicName,
             pages: comicPage,
             readPages: pagLeidas
@@ -37,11 +43,6 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
 
         addProductHandler(newComic)
         setShowModal(false)
-        newComic = {
-            name:"",
-            pages: "",
-            readPages: ""
-        }
     }
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text ,StyleSheet} from 'react-native';
+import { View, Text ,StyleSheet,TouchableOpacity} from 'react-native';
 
-export const ComicView = ({ list }) => {
+export const ComicView = ({ deleteComic, list }) => {
 
     const { name, pages, readPages } = list;
 
@@ -10,6 +10,18 @@ export const ComicView = ({ list }) => {
             <Text styles={styles.listItemText}> Comic: {name}</Text>
             <Text styles={styles.listItemText}> Páginas: {pages}</Text>
             <Text styles={styles.listItemText}> Leídas: {readPages}</Text>
+            
+            <TouchableOpacity >
+                    <View >
+                        <Text >Modificar</Text>
+                    </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={ () => deleteComic(list.key)}>
+                    <View >
+                        <Text >Eliminar</Text>
+                    </View>
+            </TouchableOpacity>
         </View>
     );
 };

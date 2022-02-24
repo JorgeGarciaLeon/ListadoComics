@@ -16,12 +16,18 @@ export default function App() {
 
   const addProductHandler = (comic) => {
     if (comic.name.value !== "") {
-      setComicList((currentComicList) => 
-          [...comicList, {key:Math.random().toString(), name: comic.name, pages: comic.pages, readPages: comic.readPages}]);  
+      setComicList((currentComicList) =>
+        [...comicList, { key: Math.random().toString(), name: comic.name, pages: comic.pages, readPages: comic.readPages }]);
     }
 
     setShowModal(false)
   };
+
+  const deleteComic = (comicKey) => {
+    setComicList((currentComicList) => {
+      return currentComicList.filter((comicList) => comicList.key !== comicKey);
+    })
+  }
 
 
   return (
@@ -35,12 +41,12 @@ export default function App() {
 
       <InputAddComic addMode={showModal} addProductHandler={addProductHandler} setShowModal={setShowModal} />
 
-      <FlatList data={comicList} renderItem={(comic)=>  { 
-          return (
-            <ComicView list={comic.item}/>
-          )
+      <FlatList data={comicList} renderItem={(comic) => {
+        return (
+          <ComicView list={comic.item} deleteComic={deleteComic} />
+        )
 
-        }} />
+      }} />
     </View>
   );
 }
