@@ -1,29 +1,28 @@
 import { useState } from "react";
 import {
-  Button,
   FlatList,
   View,
   StyleSheet,
   TouchableOpacity,
   Text
 } from 'react-native';
-import { InputAddComic } from './components/InputAddComic'
+import { InputAddComic } from './components/InputAddComic';
+import { ComicView } from './components/ComicView';
 
 
 export default function App() {
-  const [productList, setProductList] = useState([]);
+  const [comicList, setComicList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const addProductHandler = (comic) => {
-    if (comic.name !== "") {
-      setProductList((currentProductList) => 
-          [...productList, {key:Math.random().toString(), value: comic}]);  
+    if (comic.name.value !== "") {
+      setComicList((currentComicList) => 
+          [...comicList, {key:Math.random().toString(), name: comic.name, pages: comic.pages, readPages: comic.readPages}]);  
     }
 
     setShowModal(false)
   };
 
-  console.log(productList);
 
   return (
     <View style={styles.container}>
@@ -34,9 +33,14 @@ export default function App() {
         </View>
       </TouchableOpacity>
 
-
       <InputAddComic addMode={showModal} addProductHandler={addProductHandler} setShowModal={setShowModal} />
 
+      <FlatList data={comicList} renderItem={(comic)=>  { 
+          return (
+            <ComicView list={comic.item}/>
+          )
+
+        }} />
     </View>
   );
 }
@@ -47,11 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: "80%"
-  },
-  listContainer: {
-    width: "100%",
-    padding: 20
+    height: "90%"
   },
   containerButton: {
     alignSelf: "center",
@@ -66,13 +66,6 @@ const styles = StyleSheet.create({
   textButtonAdd: {
     position: "absolute",
     alignSelf: "center",
-    top: 12
-  },
-  textButtonVer: {
-    position: "absolute",
-    backgroundColor: "blue",
-    alignSelf: "center",
-    paddingRight: 220,
     top: 12
   }
 });

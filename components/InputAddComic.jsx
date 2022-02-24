@@ -12,8 +12,8 @@ import {
 export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
 
     const [comicName, setComicName] = useState("");
-    const [comicPage, setComicPage] = useState("0");
-    const [comicPagRead, setComicPageRead] = useState("0");
+    const [comicPage, setComicPage] = useState("");
+    const [comicPagRead, setComicPageRead] = useState("");
 
     const changeTextName = (comicName) => {
         setComicName(comicName);
@@ -28,15 +28,20 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
     }
 
     const sendComic = () => {
+        const pagLeidas = (parseInt(comicPagRead)*100) /parseInt(comicPage) + "%"
         const newComic = {
             name:comicName,
             pages: comicPage,
-            readPages: comicPagRead
+            readPages: pagLeidas
         }
-
 
         addProductHandler(newComic)
         setShowModal(false)
+        newComic = {
+            name:"",
+            pages: "",
+            readPages: ""
+        }
     }
 
 
@@ -60,7 +65,7 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
 
                 <TextInput
                     Style={styles.comicInput}
-                    placeholder={"Número de páginas"}
+                    placeholder={"Páginas leidas"}
                     value={comicPagRead}
                     onChangeText={changePagLeidas}
                 />
@@ -69,6 +74,12 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
                 <TouchableOpacity onPress={sendComic} style={styles.containerButton}>
                     <View style={styles.containerButton}>
                         <Text style={styles.textButtonAdd}>Añadir Comic</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setShowModal(false)} style={styles.containerButtonCancel}>
+                    <View style={styles.containerButton}>
+                        <Text style={styles.textButtonAdd}>Cancelar</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -81,31 +92,42 @@ export const InputAddComic = ({ addMode, setShowModal, addProductHandler }) => {
 const styles = StyleSheet.create({
 
     inputModal: {
-        flexDirection: "column",
+        top: "30%",
+        left: "30%",
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
-        flex: 1,
+        height: "35%",
         borderColor: "#000",
         borderWidth: 5,
+        width:150,
+        backgroundColor:"white"
     },
     comicInput: {
         width: "75%",
-        width: 200,
-        borderBottomColor: "red",
-        borderBottomWidth: 1,
+        borderColor: "blue",
+        borderWidth: 5,
         height: 40,
-        marginBottom: 5
+        marginBottom: 5,
+        top:5,
+        marginBottom: 10
     },
     containerButton: {
         alignSelf: "center",
         width: 90,
+        height: 18,
+        top: 1,
+        backgroundColor: "#f33e18",
+    },
+    containerButtonCancel:{
+        alignSelf: "center",
+        width: 90,
         height: 20,
+        top: 5,
         backgroundColor: "#f33e18",
     },
     textButtonAdd: {
         position: "absolute",
         alignSelf: "center",
-        top: 4
+        top: 1
     }
 });
