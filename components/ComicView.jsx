@@ -15,6 +15,7 @@ export const ComicView = ({ setShowModalModify, deleteComic, list, setModifyComi
             <Text styles={styles.listItemText}> Comic: {name}</Text>
             <Text styles={styles.listItemText}> Páginas: {pages}</Text>
             <Text styles={styles.listItemText}> Leídas: {readPages}</Text>
+            <Text styles={styles.listItemText}> Porcentaje: {Math.trunc((parseInt(readPages)*100)/parseInt(pages))}%</Text>
             
             <TouchableOpacity onPress={modifify}>
                     <View >
@@ -34,7 +35,7 @@ export const ComicView = ({ setShowModalModify, deleteComic, list, setModifyComi
 const styles = StyleSheet.create({
 
     listItem: {
-        height: 100,
+        height: 150,
         width: 200,
         backgroundColor: "orange",
         justifyContent: "center",

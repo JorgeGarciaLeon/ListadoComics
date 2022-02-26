@@ -34,11 +34,10 @@ export const InputAddComic = ({  addMode, setShowModal, addComic }) => {
     }
 
     const sendComic = () => {
-        const pagLeidas = (parseInt(comicPagRead)*100) /parseInt(comicPage) + "%"
         newComic = {
             name:comicName,
             pages: comicPage,
-            readPages: pagLeidas
+            readPages: comicPagRead
         }
 
         addComic(newComic)

@@ -11,7 +11,7 @@ import {
 
 export const InputModifyComic = ({ deleteComic, addComic, modifyComic, setShowModalModify, showModalModify }) => {
 
-    const [comicName, setComicName] = useState(modifyComic.name);
+    const [comicName, setComicName] = useState("");
     const [comicPage, setComicPage] = useState("");
     const [comicPagRead, setComicPageRead] = useState("");
 
