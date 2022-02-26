@@ -21,7 +21,7 @@ export default function App() {
 
   const addComic = (comic) => {
     if (comic.name.value !== "") {
-      setComicList((currentComicList) =>
+      setComicList(() =>
         [...comicList, { key: Math.random().toString(), name: comic.name, pages: comic.pages, readPages: comic.readPages }]);
     }
 

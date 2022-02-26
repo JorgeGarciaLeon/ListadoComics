@@ -11,13 +11,9 @@ import {
 
 export const InputModifyComic = ({ deleteComic, addComic, modifyComic, setShowModalModify, showModalModify }) => {
 
-    const [comicName, setComicName] = useState("");
-    const [comicPage, setComicPage] = useState("");
-    const [comicPagRead, setComicPageRead] = useState("");
-
-    //setComicName(modifyComic.name);
-    //setComicPage(modifyComic.pages);
-    //setComicPageRead(modifyComic.readPages)
+    const [comicName, setComicName] = useState(modifyComic.name);
+    const [comicPage, setComicPage] = useState(modifyComic.pages);
+    const [comicPagRead, setComicPageRead] = useState(modifyComic.readPages);
 
 
     const changeTextName = (comicName) => {
@@ -33,13 +29,13 @@ export const InputModifyComic = ({ deleteComic, addComic, modifyComic, setShowMo
     }
 
     const changeComic = () => {
-        const pagLeidas = (parseInt(comicPagRead)*100) /parseInt(comicPage) + "%"
+        
         const newComic = {
             name:comicName,
             pages: comicPage,
-            readPages: pagLeidas
+            readPages: comicPagRead
         }
-        deleteComic(modifyComic["key"]);
+        deleteComic(modifyComic.key);
         addComic(newComic);
         setShowModalModify(false)
     }

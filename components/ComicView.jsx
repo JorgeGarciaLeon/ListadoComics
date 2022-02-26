@@ -6,8 +6,13 @@ export const ComicView = ({ setShowModalModify, deleteComic, list, setModifyComi
     const { name, pages, readPages } = list;
 
     const modifify = () =>{
+        const sendComic ={
+            name,
+            pages,
+            readPages
+        }
         setShowModalModify(true)
-        setModifyComic(list)
+        setModifyComic(sendComic)
     }
 
     return (

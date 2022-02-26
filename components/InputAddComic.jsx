@@ -42,6 +42,9 @@ export const InputAddComic = ({  addMode, setShowModal, addComic }) => {
 
         addComic(newComic)
         setShowModal(false)
+        setComicName("")
+        setComicPage("")
+        setComicPageRead("")
     }
 
 
